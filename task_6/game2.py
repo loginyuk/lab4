@@ -103,9 +103,10 @@ class Item:
         return self.item_name
 
 
-
-
 class Character:
+    """
+    This class represents an character in the game.
+    """
     def __init__(self, habit_name, description):
         self.habit_name = habit_name
         self.description = description
@@ -113,37 +114,31 @@ class Character:
 
     def set_conversation(self, conversation: str):
         """
-        This method sets the conversation of the enemy.
+        This method sets the conversation of the character.
         """
         self.conversation = conversation
 
     def describe(self) -> str:
         """
-        This method prints the description of the enemy.
+        This method prints the description of the character.
         """
         print(f'{self.habit_name} тут!')
         print(self.description)
 
     def talk(self) -> str:
         """
-        This method prints the conversation of the enemy.
+        This method prints the conversation of the character.
         """
         print(f'[{self.habit_name} каже]: {self.conversation}')
-
-
-
 
 
 class Enemy(Character):
     """
     This class represents an enemy in the game.
     """
-
-
     def __init__(self, habit_name, description):
         super().__init__(habit_name, description)
         self.weakness = None
-
 
     def set_conversation(self, conversation: str):
         """
@@ -181,34 +176,30 @@ class Enemy(Character):
             return False
 
 
-
 class Friend(Character):
     """
-    This class represents an enemy in the game.
+    This class represents an character in the game.
     """
-
-
     def __init__(self, habit_name, description):
         super().__init__(habit_name, description)
 
     def set_conversation(self, conversation: str):
         """
-        This method sets the conversation of the enemy.
+        This method sets the conversation of the character.
         """
         super().set_conversation(conversation)
 
     def describe(self) -> str:
         """
-        This method prints the description of the enemy.
+        This method prints the description of the character.
         """
         super().describe()
 
     def talk(self) -> str:
         """
-        This method prints the conversation of the enemy.
+        This method prints the conversation of the character.
         """
         super().talk()
-    
+
     def help(self):
         print("Я моку можу тобі допомогти")
-

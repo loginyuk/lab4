@@ -1,4 +1,10 @@
+"""
+У цій грі ви ходите по Львову.
+Можна зустріти двох типів персонажів: друзів і ворогів.
+Головне вбити всіх ворогів та дійти до останньої вулиці.
+"""
 import game2 as game
+
 
 Stryyska = game.Street("вулиця Стрийська")
 Stryyska.set_description("Одна з найдовших (близько 7,5 км), \
@@ -63,6 +69,13 @@ nokia = game.Item("Нокіа 3310")
 nokia.set_description("Невбиваєма телефонка")
 Franka.set_item(nokia)
 
+hammer = game.Item("Молоток")
+hammer.set_description("ГОловне, щоб не було серпа")
+Shevchenka.set_item(hammer)
+
+sickle = game.Item("Серп")
+sickle.set_description("ГОловне, щоб не було молотка")
+Krakivska.set_item(sickle)
 
 current_street = Stryyska
 backpack = []
@@ -72,8 +85,7 @@ win = False
 defeat = 0
 friend = False
 
-while dead == False or win == True:
-
+while dead is False or win is False:
 
     print("\n")
     current_street.get_details()
@@ -89,38 +101,33 @@ while dead == False or win == True:
     command = input("> ")
 
     if command in ["north", "south", "east", "west"]:
-        # Move in the given direction
         current_street = current_street.move(command)
-        
-            
+
     elif command == "talk":
         # Talk to the inhabitant - check whether there is one!
         if inhabitant is not None:
             inhabitant.talk()
+
     elif command == "help":
-        # if inhabitant == 'cavalier':
         friend = current_street.get_character()
         if friend is not None:
-            friend.help()
+            # try:
+                friend.help()
+            # except 
         friend = True
         current_street.character = None
 
-
     elif command == "fight":
-        # print()
-        # print(inhabitant)
-        # print(current_street)
-        # print()
-
         if inhabitant is not None:
             # Fight with the inhabitant, if there is one
-            print("What will you fight with?")
+            print("Чим будеш його гамселити?")
+            print(f"Вибери зі свого рюкзаку: {backpack}")
             fight_with = input()
 
             # Do I have this item?
             if fight_with in backpack:
 
-                if inhabitant.fight(fight_with) == True:
+                if inhabitant.fight(fight_with) is True:
                     # What happens if you win?
                     print("Та ти машина!")
                     current_street.character = None
@@ -134,7 +141,7 @@ while dead == False or win == True:
                         print("Ти навіть не зміг вбити ворога, ти просто сміття")
                         dead = True
             else:
-                print("В тебе нема " + fight_with)
+                print(f"В тебе нема {fight_with}. йти шукай")
         else:
             print("Нема з ким битися")
     elif command == "take":
@@ -142,12 +149,11 @@ while dead == False or win == True:
             print("Ти жостко поклав " + item.get_name() + " в плахту")
             backpack.append(item.get_name())
             current_street.set_item(None)
-            
-            # print(item.get_name())
+
         else:
             print("Нема чого брати")
     else:
         print("Я тебе не розумію " + command)
-    if current_street == Krakivska and defeat == 3:
+    if defeat == 3:
         win = True
-        print("Ти хто такий? Як ти взагалі вийшов з тюрми?")
+        print("Ти хто такий? Ти вбив всіх ворогів")
