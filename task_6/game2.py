@@ -65,7 +65,7 @@ class Street():
         print('--------------------')
         print(self.street_description)
         for direction, name in self.linked_streets.items():
-            print(f'The {name.street_name} is {direction}')
+            print(f'Вулиця {name.street_name} розташована {direction}')
 
     def move(self, direction: str) -> str:
         """
@@ -94,7 +94,7 @@ class Item:
         """
         This method prints the description of the item.
         """
-        print(f'The [{self.item_name}] is here - {self.item_description}')
+        print(f'Можна підібрати [{self.item_name}] - {self.item_description}')
 
     def get_name(self) -> str:
         """
@@ -121,14 +121,14 @@ class Character:
         """
         This method prints the description of the enemy.
         """
-        print(f'{self.habit_name} is here!')
+        print(f'{self.habit_name} тут!')
         print(self.description)
 
     def talk(self) -> str:
         """
         This method prints the conversation of the enemy.
         """
-        print(f'[{self.habit_name} says]: {self.conversation}')
+        print(f'[{self.habit_name} каже]: {self.conversation}')
 
 
 
@@ -139,7 +139,6 @@ class Enemy(Character):
     This class represents an enemy in the game.
     """
 
-    defeated = 0
 
     def __init__(self, habit_name, description):
         super().__init__(habit_name, description)
@@ -174,21 +173,13 @@ class Enemy(Character):
         """
         This method allows the player to fight the enemy.
         """
-        print(combat_item)
-        print(self.weakness)
         if combat_item == self.weakness:
-            print(f'You fend {self.habit_name} off with the {combat_item}')
-            Enemy.defeated += 1
+            print(f'Ти поборов {self.habit_name} завдяки {combat_item}')
             return True
         else:
-            print(f'{self.habit_name} crushes you, puny adventurer')
+            print(f'{self.habit_name} розніс тебе')
             return False
 
-    def get_defeated(self) -> int:
-        """
-        This method returns the number of enemies defeated.
-        """
-        return Enemy.defeated
 
 
 class Friend(Character):
@@ -219,5 +210,5 @@ class Friend(Character):
         super().talk()
     
     def help(self):
-        print("I can help you to find the way to the next street")
+        print("Я моку можу тобі допомогти")
 

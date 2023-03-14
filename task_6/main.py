@@ -70,6 +70,7 @@ backpack = []
 dead = False
 win = False
 defeat = 0
+friend = False
 
 while dead == False or win == True:
 
@@ -101,7 +102,8 @@ while dead == False or win == True:
         friend = current_street.get_character()
         if friend is not None:
             friend.help()
-
+        friend = True
+        current_street.character = None
 
 
     elif command == "fight":
@@ -126,8 +128,8 @@ while dead == False or win == True:
                 else:
                     # What happens if you lose?
                     print("Ну і не дивно, здохляк")
-                    if friend is not None:
-                        friend = None
+                    if friend is True:
+                        friend = False
                     else:
                         print("Ти навіть не зміг вбити ворога, ти просто сміття")
                         dead = True
@@ -140,12 +142,12 @@ while dead == False or win == True:
             print("Ти жостко поклав " + item.get_name() + " в плахту")
             backpack.append(item.get_name())
             current_street.set_item(None)
+            
             # print(item.get_name())
         else:
             print("Нема чого брати")
     else:
         print("Я тебе не розумію " + command)
-    
     if current_street == Krakivska and defeat == 3:
         win = True
         print("Ти хто такий? Як ти взагалі вийшов з тюрми?")
