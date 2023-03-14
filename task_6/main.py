@@ -127,9 +127,9 @@ while dead == False or win == True:
                     defeat += 1
                 else:
                     # What happens if you lose?
-                    print("Ну і не дивно, здохляк")
                     if friend is True:
                         friend = False
+                        print("Ну і не дивно, каблуки слабкі")
                     else:
                         print("Ти навіть не зміг вбити ворога, ти просто сміття")
                         dead = True
